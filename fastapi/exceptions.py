@@ -1,9 +1,13 @@
-from typing import Any, Dict, Optional, Sequence, Type, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Type, Union
 
+from fastapi._compat import display_errors
 from pydantic import BaseModel, create_model
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.exceptions import WebSocketException as StarletteWebSocketException
 from typing_extensions import Annotated, Doc
+
+if TYPE_CHECKING:  # pragma: nocover
+    from fastapi._compat import ErrorDict
 
 
 class HTTPException(StarletteHTTPException):
@@ -147,17 +151,25 @@ class FastAPIError(RuntimeError):
 
 
 class ValidationException(Exception):
-    def __init__(self, errors: Sequence[Any]) -> None:
+    def __init__(self, errors: List["ErrorDict"]) -> None:
         self._errors = errors
 
-    def errors(self) -> Sequence[Any]:
+    def errors(self) -> List["ErrorDict"]:
         return self._errors
 
 
 class RequestValidationError(ValidationException):
-    def __init__(self, errors: Sequence[Any], *, body: Any = None) -> None:
+    def __init__(self, errors: List["ErrorDict"], *, body: Any = None) -> None:
         super().__init__(errors)
         self.body = body
+
+    def __str__(self) -> str:
+        errors = self.errors()
+        no_errors = len(errors)
+        return (
+            f"{no_errors} validation error{'' if no_errors == 1 else 's'}\n"
+            f"{display_errors(errors)}"
+        )
 
 
 class WebSocketRequestValidationError(ValidationException):
@@ -165,7 +177,7 @@ class WebSocketRequestValidationError(ValidationException):
 
 
 class ResponseValidationError(ValidationException):
-    def __init__(self, errors: Sequence[Any], *, body: Any = None) -> None:
+    def __init__(self, errors: List["ErrorDict"], *, body: Any = None) -> None:
         super().__init__(errors)
         self.body = body
 

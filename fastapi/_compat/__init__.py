@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from .main import BaseConfig as BaseConfig
 from .main import PydanticSchemaGenerationError as PydanticSchemaGenerationError
 from .main import RequiredParam as RequiredParam
@@ -48,3 +50,7 @@ from .v1 import CoreSchema as CoreSchema
 from .v1 import GetJsonSchemaHandler as GetJsonSchemaHandler
 from .v1 import JsonSchemaValue as JsonSchemaValue
 from .v1 import _normalize_errors as _normalize_errors
+from .v1 import display_errors as display_errors
+
+if TYPE_CHECKING:  # pragma: nocover
+    from .v1 import ErrorDict as ErrorDict
