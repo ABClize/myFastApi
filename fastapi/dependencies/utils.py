@@ -28,7 +28,6 @@ from fastapi._compat import (
     RequiredParam,
     Undefined,
     UndefinedType,
-    _regenerate_error_with_loc,
     _is_error_wrapper,
     _is_model_class,
     copy_field_info,
