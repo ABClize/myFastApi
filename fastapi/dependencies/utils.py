@@ -1,7 +1,6 @@
 import collections
 import inspect
 import re
-import sys
 from contextlib import AsyncExitStack, contextmanager
 from copy import copy, deepcopy
 from dataclasses import dataclass
@@ -753,7 +752,11 @@ class ParameterCodec:
         field: ModelField,
     ) -> Dict[str, Any]:
         fn: Callable[
-            [Union[params.Param, temp_pydantic_v1_params.Param], Union[Mapping[str, Any], QueryParams, Headers], ModelField],
+            [
+                Union[params.Param, temp_pydantic_v1_params.Param],
+                Union[Mapping[str, Any], QueryParams, Headers],
+                ModelField,
+            ],
             Dict[str, Any],
         ]
         fn = getattr(ParameterCodec, f"decode_{field_info.style}")
