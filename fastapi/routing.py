@@ -235,7 +235,7 @@ async def serialize_response(
         errors = []
         if not hasattr(field, "serialize"):
             # pydantic v1
-            assert not to_json, "PydanticJSONResponse requires pydantic v2"
+            assert not to_json, "PydanticJSONResponse requires a pydantic v2 model"
             response_content = _prepare_response_content(
                 response_content,
                 exclude_unset=exclude_unset,
