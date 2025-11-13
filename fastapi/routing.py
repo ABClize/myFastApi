@@ -677,6 +677,7 @@ class APIRoute(routing.Route):
 
 
 class APIRouter(routing.Router):
+    # APIRouter 用于组织一组相关的路径操作，方便按模块拆分业务逻辑。
     """
     `APIRouter` class, used to group *path operations*, for example to structure
     an app in multiple files. It would then be included in the `FastAPI` app, or

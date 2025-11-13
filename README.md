@@ -23,6 +23,8 @@
 
 **Documentation**: <a href="https://fastapi.tiangolo.com" target="_blank">https://fastapi.tiangolo.com</a>
 
+**中文学习引导**: [docs/zh/fastapi_learning_guide.md](docs/zh/fastapi_learning_guide.md)
+
 **Source Code**: <a href="https://github.com/fastapi/fastapi" target="_blank">https://github.com/fastapi/fastapi</a>
 
 ---
