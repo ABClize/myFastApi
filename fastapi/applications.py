@@ -50,6 +50,7 @@ AppType = TypeVar("AppType", bound="FastAPI")
 
 
 class FastAPI(Starlette):
+    # FastAPI 继承自 Starlette，这是框架的核心应用类，负责整合路由、依赖、文档等功能。
     """
     `FastAPI` app class, the main entrypoint to use FastAPI.
 
